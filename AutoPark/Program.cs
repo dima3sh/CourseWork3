@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoPark.Model;
+using AutoPark.Model.services;
+using AutoPark.Presenters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +19,10 @@ namespace AutoPark
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ParkForm());
+            ParkForm park = new ParkForm();
+            IParkPresenter presenter = new ParkPresenter(park, new ParkService(new CarRepository()));
+            park.Presenter = presenter;
+            presenter.ShowForm();
         }
     }
 }
