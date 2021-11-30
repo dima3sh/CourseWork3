@@ -13,7 +13,10 @@ namespace AutoPark
     {
         public DataBase() {
             Cars = new ObservableCollection<Car>();
+            Categories = new ObservableCollection<Category>();
         }
         public ObservableCollection<Car> Cars { get; set; }
+
+        public ObservableCollection<Category> Categories { get; set; }
     }
 }

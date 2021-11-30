@@ -38,6 +38,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -76,13 +79,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarForm.cs">
+    <Compile Include="View\Forms\CarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CarForm.Designer.cs">
+    <Compile Include="View\Forms\CarForm.Designer.cs">
       <DependentUpon>CarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CarRepository.cs" />
+    <Compile Include="Entity\Category.cs" />
+    <Compile Include="Model\CategoryRepository.cs" />
     <Compile Include="Model\DaoXml.cs" />
     <Compile Include="Entity\DataBase.cs" />
     <Compile Include="Entity\Car.cs" />
@@ -91,26 +96,42 @@
     <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\services\IService.cs" />
     <Compile Include="Model\services\ParkService.cs" />
-    <Compile Include="ParkForm.cs">
+    <Compile Include="Entity\Enums\TypeCar.cs" />
+    <Compile Include="View\ParkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParkForm.Designer.cs">
+    <Compile Include="View\ParkForm.Designer.cs">
       <DependentUpon>ParkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\CarPresenter.cs" />
+    <Compile Include="Presenters\CategoryPresenter.cs" />
     <Compile Include="Presenters\ICarPresenter.cs" />
+    <Compile Include="Presenters\ICategoryPresenter.cs" />
     <Compile Include="Presenters\IParkPresenter.cs" />
     <Compile Include="Presenters\IPreenter.cs" />
     <Compile Include="Presenters\ParkPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Forms\AddCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\AddCategoryForm.Designer.cs">
+      <DependentUpon>AddCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\EditCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\EditCategoryForm.Designer.cs">
+      <DependentUpon>EditCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ICategoryView.cs" />
     <Compile Include="View\ICarView.cs" />
     <Compile Include="View\IParkView.cs" />
     <Compile Include="View\IView.cs" />
-    <EmbeddedResource Include="CarForm.resx">
+    <EmbeddedResource Include="View\Forms\CarForm.resx">
       <DependentUpon>CarForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParkForm.resx">
+    <EmbeddedResource Include="View\ParkForm.resx">
       <DependentUpon>ParkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -122,7 +143,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\Forms\AddCategoryForm.resx">
+      <DependentUpon>AddCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\EditCategoryForm.resx">
+      <DependentUpon>EditCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\AutoPark.Entity.Car.datasource" />
+    <None Include="Properties\DataSources\AutoPark.Model.Category.datasource" />
+    <None Include="Properties\DataSources\DataBase.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -20,7 +20,7 @@ namespace AutoPark
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ParkForm park = new ParkForm();
-            IParkPresenter presenter = new ParkPresenter(park, new ParkService(new CarRepository()));
+            IParkPresenter presenter = new ParkPresenter(park, new ParkService());
             park.Presenter = presenter;
             presenter.ShowForm();
         }

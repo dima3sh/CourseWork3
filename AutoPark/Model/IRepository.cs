@@ -12,6 +12,12 @@ namespace AutoPark.Model
     {
         bool Contains(T obj);
         void AddElement(T obj);
-        ObservableCollection<Car> GetAllCars();
+        ObservableCollection<T> GetAllElems();
+
+        T FindElemByNumber(string number);
+
+        void UpdateElem(T newObj, string number);
+
+        bool DeleteElemByNumber(string number);
     }
 }

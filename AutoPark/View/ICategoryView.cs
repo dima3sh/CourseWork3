@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AutoPark.View
 {
-    interface IParkView : IView<IParkPresenter>
+    interface ICategoryView : IView<ICategoryPresenter>
     {
-        void UpdateParkView(List<string[]> cars);
+        
     }
 }

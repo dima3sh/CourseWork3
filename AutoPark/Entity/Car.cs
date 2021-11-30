@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoPark.Entity.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,14 @@ namespace AutoPark.Entity
     {
         public string Model { get; set; }
 
-        public string Category { get; set; }
+        public string CategoryId { get; set; }
 
         public string Number { get; set; }
 
         public override bool Equals(object obj)
         {
-            return Number.Equals(obj);
+            return Number.Equals(((Car)obj).Number);
         }
+        public TypeCar Type { get; set; }
     }
 }
