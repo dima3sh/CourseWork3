@@ -67,6 +67,9 @@ namespace AutoPark.View
                     Close();
                 }
             }
+            else {
+                ShowMessage("Category isn't selected!");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

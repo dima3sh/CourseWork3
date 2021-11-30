@@ -51,7 +51,7 @@ namespace AutoPark.Presenters
             catch (ArgumentException ex) {
                 _view.ShowMessage(ex.Message);
                 return false;
-            }
+            } 
         }
 
         public void UpdateCategory(Category category)
@@ -68,6 +68,11 @@ namespace AutoPark.Presenters
         public List<TypeCar> GetCarTypes()
         {
             return _service.GetCarTypes();
+        }
+
+        private bool ValidateElem(Category category)
+        {
+            return category != null && category.Name != "";
         }
     }
 }

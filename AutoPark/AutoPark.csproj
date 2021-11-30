@@ -97,10 +97,10 @@
     <Compile Include="Model\services\IService.cs" />
     <Compile Include="Model\services\ParkService.cs" />
     <Compile Include="Entity\Enums\TypeCar.cs" />
-    <Compile Include="View\ParkForm.cs">
+    <Compile Include="View\Forms\ParkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ParkForm.Designer.cs">
+    <Compile Include="View\Forms\ParkForm.Designer.cs">
       <DependentUpon>ParkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\CarPresenter.cs" />
@@ -131,7 +131,7 @@
     <EmbeddedResource Include="View\Forms\CarForm.resx">
       <DependentUpon>CarForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ParkForm.resx">
+    <EmbeddedResource Include="View\Forms\ParkForm.resx">
       <DependentUpon>ParkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
