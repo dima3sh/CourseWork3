@@ -2,11 +2,9 @@
 using AutoPark.Entity.Enums;
 using AutoPark.Model.services;
 using AutoPark.View;
-using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoPark.Presenters
 {
@@ -21,35 +19,47 @@ namespace AutoPark.Presenters
             this._service = service;
         }
 
-        public bool AddCar(Car car)
+        public void AddCar(Car car)
         {
-            return _service.addCar(car);
+            if (_service.addCar(car))
+            {
+                _view.SaveImage(car.Number);
+                _view.CloseForm();
+                _view.ShowMessage(Properties.Resources.AddCarResponse);
+            }
+            else {
+                _view.ShowMessage(Properties.Resources.AddCarBadResponse);   
+            }
         }
 
         public void CloseForm()
         {
-            throw new NotImplementedException();
+            _view.CloseForm();
         }
 
         public List<Category> GetCategoriesByType(TypeCar type)
-        {
+        {               
             return _service.GetCategoriesByType(type).ToList();
         }
 
-        public bool EditCar(Car request, string number)
+        public void EditCar(Car request, string number)
         {
-            if (request.CategoryId.Trim() != "" && request.Number.Trim() != "" && request.Model.Trim() != "") {
-                _service.EditCar(request, number);
-                return true;
+            if (_service.EditCar(request, number)) {
+                _view.SaveImage(number);
+                _view.CloseForm();
+                _view.ShowMessage(Properties.Resources.EditCarResponse);
             }
-            return false;
+            else
+            {
+                _view.ShowMessage(Properties.Resources.EditCarBadResponce);
+            }
         }
 
         public void ShowForm()
         {
-            throw new NotImplementedException();
+            _view.ShowForm();
         }
-
+        
         public Category FindCategoryById(string number)
         {
             return _service.FindCategoryById(number);
@@ -58,6 +68,21 @@ namespace AutoPark.Presenters
         public List<TypeCar> GetCarTypes()
         {
             return _service.GetCarTypes();
+        }
+
+        
+        public void SaveCarImage(Bitmap image, string number) {
+            if (image != null && number != null && number.Trim() != "")
+            {
+                CarPicture img = new CarPicture();
+                img.Picture = image;
+                img.Number = number;
+                _service.SavePicture(img);
+            }
+        }
+
+        public bool HasImage(string number) {
+            return _service.HasCarImage(number);
         }
     }
 }

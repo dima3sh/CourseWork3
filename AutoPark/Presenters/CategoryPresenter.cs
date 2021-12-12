@@ -5,8 +5,6 @@ using AutoPark.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoPark.Presenters
 {
@@ -17,14 +15,19 @@ namespace AutoPark.Presenters
 
         public CategoryPresenter(ICategoryView carForm, IService service)
         {
-            this._view = carForm;
-            this._service = service;
+            _view = carForm;
+            _service = service;
         }
 
         public void AddCategory(Category category)
         {
             if (_service.AddCategory(category)) {
                 CloseForm();
+                _view.ShowMessage(Properties.Resources.AddCategoryResponse);
+            }
+            else
+            {
+                _view.ShowMessage(Properties.Resources.AddCategoryBadResponse);
             }
         }
 
@@ -58,7 +61,14 @@ namespace AutoPark.Presenters
         {
             try
             {
-                _service.UpdateCategory(category, category.Id);
+                if (_service.UpdateCategory(category, category.Id)) {
+                    CloseForm();
+                    _view.ShowMessage(Properties.Resources.UpdateCategoryResponse);
+                }
+                else
+                {
+                    _view.ShowMessage(Properties.Resources.UpdateCategoryBadResponse);
+                }
             }
             catch (ArgumentException e) {
                 _view.ShowMessage(e.Message);
@@ -68,11 +78,6 @@ namespace AutoPark.Presenters
         public List<TypeCar> GetCarTypes()
         {
             return _service.GetCarTypes();
-        }
-
-        private bool ValidateElem(Category category)
-        {
-            return category != null && category.Name != "";
         }
     }
 }

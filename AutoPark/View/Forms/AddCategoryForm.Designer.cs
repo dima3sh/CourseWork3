@@ -95,7 +95,6 @@ namespace AutoPark.View
             this.ComboboxType.Name = "ComboboxType";
             this.ComboboxType.Size = new System.Drawing.Size(241, 26);
             this.ComboboxType.TabIndex = 5;
-            this.ComboboxType.SelectedIndexChanged += new System.EventHandler(this.ComboboxType_SelectedIndexChanged);
             // 
             // AddCategoryForm
             // 

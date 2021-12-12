@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AutoPark/Properties/DataSources/DataBase/dataBase.xml
+/AutoPark/Properties/DataSources/images/cars/134132.png

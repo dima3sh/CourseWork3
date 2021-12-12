@@ -1,14 +1,8 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
+using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoPark.View
@@ -29,33 +23,31 @@ namespace AutoPark.View
 
         public void ShowForm()
         {
-            Show();
+            ShowDialog();
         }
 
         public void ShowMessage(string message)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(message);
         }
 
         private void CategoryForm_Load(object sender, EventArgs e)
         {
-            ComboboxType.DataSource = Presenter.GetCarTypes();            
+            ComboboxType.DataSource = Presenter.GetCarTypes();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (TxtBoxName.Text.Trim() != "") {
+            if (ValidaterUtil.IsValidCategoryName(TxtBoxName.Text))
+            {
                 Category category = new Category();
                 category.Name = TxtBoxName.Text.Trim();
                 category.Type = (TypeCar)ComboboxType.SelectedItem;
-                Presenter.AddCategory(category); 
-                
+                Presenter.AddCategory(category);
             }
-        }
-
-        private void ComboboxType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            else {
+                ShowMessage(Properties.Resources.InvalidCategoryName);
+            }
         }
     }
 }

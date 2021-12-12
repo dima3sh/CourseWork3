@@ -1,11 +1,8 @@
 ﻿using AutoPark.Entity;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoPark.Model
 {
@@ -15,11 +12,11 @@ namespace AutoPark.Model
         public CarRepository()
         {            
             _dataBase = DaoXml.GetDataBase();
+            _dataBase.Cars.CollectionChanged += SaveChanges;
         }
 
         public void AddElement(Car car) {
             _dataBase.Cars.Add(car);
-            DaoXml.saveAsync();
         }
 
         public ObservableCollection<Car> GetAllElems() {
@@ -42,7 +39,6 @@ namespace AutoPark.Model
             if (car != null) {
                 _dataBase.Cars[_dataBase.Cars.IndexOf(car)] = newObj;
             }
-            DaoXml.saveAsync();
         }
 
         public bool DeleteElemByNumber(string number)
@@ -50,11 +46,14 @@ namespace AutoPark.Model
             Car car = _dataBase.Cars.Where(x => x.Number.Equals(number)).First();
             if (car != null)
             {
-                _dataBase.Cars.Remove(car);
-                DaoXml.saveAsync();
+                _dataBase.Cars.Remove(car);                
                 return true;
             }
             return false;
+        }
+
+        private void SaveChanges(object sender, NotifyCollectionChangedEventArgs e) {
+            DaoXml.saveAsync();
         }
     }
 }

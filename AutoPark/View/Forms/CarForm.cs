@@ -1,24 +1,22 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
+using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using AutoPark.View;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AutoPark
 {
     public partial class CarForm : Form, ICarView
     {
-        private bool _isEditForm;
+        private bool _isEditForm; 
         private string _oldNumber;
         private string _oldCategory;
+        private string _imagePath;
+        private Bitmap _image;
 
         public ICarPresenter Presenter { get; set; }
 
@@ -27,19 +25,18 @@ namespace AutoPark
             InitializeComponent();
             _isEditForm = false;
             _oldNumber = null;
-            Load += LoadTypeCar;
+            Load += LoadTypeCar;            
         }
 
         public CarForm(Car car)
         {
             InitializeComponent();
-            button1.Text = "Edit";
-            CarModel.Text = car.Model;
-            CarNumber.Text = car.Number;
+            
+            FillFieldEditCar(car);
             _oldNumber = car.Number;            
-            _isEditForm = true;
-            ComboBoxTypeCar.Enabled = false;
-            _oldCategory = car.CategoryId;
+            _isEditForm = true;    
+            _oldCategory = car.CategoryId;            
+            Load += LoadCategory;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -49,26 +46,88 @@ namespace AutoPark
 
         private void LoadTypeCar(object sender, EventArgs e)
         {
-            ComboBoxTypeCar.DataSource = Presenter.GetCarTypes();
+            ComboBoxTypeCar.DataSource = Presenter.GetCarTypes();            
+        }
+
+        private void LoadCategory(object sender, EventArgs e)
+        {
+            Category category = Presenter.FindCategoryById(_oldCategory);
+            LoadCategories(category.Type);
+            CategoryComboBox.SelectedItem = category;
+            ComboBoxTypeCar.Items.Add(category.Type);
+            ComboBoxTypeCar.SelectedItem = category.Type;
+            if (Presenter.HasImage(_oldNumber))
+            {
+                labelImageName.Text = "Has Image";
+            }
         }
 
         public void ShowForm()
         {
-            this.Show();
+            ShowDialog();
         }
 
         public void CloseForm()
         {
-            throw new NotImplementedException();
+            Close();
         }
 
         public void ShowMessage(string message)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(message);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Car car = GetCar();
+            if (ValidaterUtil.ValidateCar(car)) {
+                if (_isEditForm)
+                {
+                    Presenter.EditCar(car, _oldNumber);
+                } else {
+                    Presenter.AddCar(car);
+                }
+            } else { 
+                ShowMessage(Properties.Resources.InvalidData);
+            }
+        }
+
+        private string GetCategoryId() {
+            Category category = (Category)CategoryComboBox.SelectedItem;
+            return category != null ? category.Id : "";            
+        }
+
+        private void ComboBoxTypeCar_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            CategoryComboBox.Items.Clear();
+            TypeCar type = (TypeCar)ComboBoxTypeCar.SelectedItem;
+            LoadCategories(type);
+            CategoryComboBox.SelectedItem = Presenter.FindCategoryById(_oldCategory);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Stream  myStream;
+            OpenFileDialog  openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = Properties.Resources.InitialDirectoryPath;
+            openFileDialog1.Filter = "Image files (*.*)|*.png";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if ((myStream = openFileDialog1.OpenFile()) != null)
+                {
+                    _imagePath = openFileDialog1.SafeFileName;
+                    _image = new Bitmap(Image.FromStream(myStream), 40, 40);                    
+                    labelImageName.Text = _imagePath;
+                    myStream.Close();
+                }
+            }
+        }
+
+        private Car GetCar() { 
             Car car;
             if (((TypeCar)ComboBoxTypeCar.SelectedItem).Equals(TypeCar.PASSENGER_CAR))
             {
@@ -79,30 +138,25 @@ namespace AutoPark
             }
             car.Number = CarNumber.Text;
             car.Model = CarModel.Text;
-            car.CategoryId = GetCategoryId();
-            if (_isEditForm)
-            {
-                Presenter.EditCar(car, _oldNumber);
-                this.Close();
-            } else if (Presenter.AddCar(car)) {
-                this.Close();
-            }
+            car.CategoryId = GetCategoryId();           
+            return car;
         }
 
-        private string GetCategoryId() {
-            Category category = (Category)CategoryComboBox.SelectedItem;
-
-            return category != null ? category.Id : "";
-            
+        public void SaveImage(string number) {
+            Presenter.SaveCarImage(_image, number);
         }
 
-        private void ComboBoxTypeCar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CategoryComboBox.Items.Clear();
-            TypeCar type = (TypeCar)ComboBoxTypeCar.SelectedItem;
+        private void LoadCategories(TypeCar type) {
             CategoryComboBox.Items.AddRange(Presenter.GetCategoriesByType(type).ToArray());
-            CategoryComboBox.SelectedItem = Presenter.FindCategoryById(_oldCategory);
-            
+        }
+
+        private void FillFieldEditCar(Car car) {
+            if (car != null) {
+                CarModel.Text = car.Model;
+                CarNumber.Text = car.Number;
+            }
+            button1.Text = "Edit";
+            ComboBoxTypeCar.Enabled = false;
         }
     }
 }

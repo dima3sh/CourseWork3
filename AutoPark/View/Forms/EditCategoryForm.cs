@@ -1,14 +1,8 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
+using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoPark.View
@@ -28,7 +22,7 @@ namespace AutoPark.View
 
         public void ShowForm()
         {
-            Show();
+            ShowDialog();
         }
 
         public void ShowMessage(string message)
@@ -74,13 +68,19 @@ namespace AutoPark.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Category category = (Category)comboBox1.SelectedItem;
-            if (category != null && TxtBoxName.Text.Trim() != "")
+            Category obj = (Category)comboBox1.SelectedItem;
+            string name = TxtBoxName.Text.Trim();
+            if (obj != null && ValidaterUtil.IsValidString(name))
             {
-                category.Name = TxtBoxName.Text.Trim();
+                Category category = new Category();
+                category.Id = obj.Id;
+                category.Name = name;
                 category.Type = (TypeCar)ComboBoxType.SelectedItem;
                 Presenter.UpdateCategory(category);
                 Close();
+            }
+            else {
+                ShowMessage(Properties.Resources.InvalidData);
             }
         }
     }

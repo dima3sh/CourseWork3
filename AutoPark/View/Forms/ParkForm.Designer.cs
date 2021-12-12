@@ -32,6 +32,7 @@ namespace AutoPark
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ParkForm));
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,6 +53,7 @@ namespace AutoPark
             // 
             this.listView1.BackColor = System.Drawing.SystemColors.Window;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
@@ -63,29 +65,39 @@ namespace AutoPark
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(822, 416);
+            this.listView1.Size = new System.Drawing.Size(908, 416);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // columnHeader5
+            // 
+            this.columnHeader5.DisplayIndex = 4;
+            this.columnHeader5.Text = "Image";
+            this.columnHeader5.Width = 115;
+            // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 0;
             this.columnHeader2.Text = "Number";
             this.columnHeader2.Width = 145;
             // 
             // columnHeader3
             // 
+            this.columnHeader3.DisplayIndex = 1;
             this.columnHeader3.Text = "Model";
-            this.columnHeader3.Width = 267;
+            this.columnHeader3.Width = 223;
             // 
             // columnHeader4
             // 
+            this.columnHeader4.DisplayIndex = 2;
             this.columnHeader4.Text = "Category";
             this.columnHeader4.Width = 191;
             // 
             // columnHeader1
             // 
+            this.columnHeader1.DisplayIndex = 3;
             this.columnHeader1.Text = "Type";
             this.columnHeader1.Width = 213;
             // 
@@ -216,6 +228,7 @@ namespace AutoPark
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
 

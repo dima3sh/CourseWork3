@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoPark.Model.services
 {
@@ -13,10 +11,12 @@ namespace AutoPark.Model.services
     {
         private IRepository<Car> _carRepository;
         private IRepository<Category> _categoryRepository;
+        private IRepository<CarPicture> _imageRepository;
 
         public ParkService() {
             _carRepository = new CarRepository();
             _categoryRepository = new CategoryRepository();
+            _imageRepository = new PictureRepository();
         }
 
         public bool addCar(Car car)
@@ -32,25 +32,16 @@ namespace AutoPark.Model.services
         public void DeleteCar(string number)
         {
             _carRepository.DeleteElemByNumber(number);
+            _imageRepository.DeleteElemByNumber(number);
         }
 
-        public ObservableCollection<Category> GetCategories() {
-            return _categoryRepository.GetAllElems();
-        }
-
-        public void EditCar(Car request, string number)
+        public bool EditCar(Car request, string number)
         {
-            _carRepository.UpdateElem(request, number);
-        }
-
-        public Car FindCarByNumber(string number)
-        {
-            return _carRepository.FindElemByNumber(number);
-        }
-
-        public Category FindCategoryById(string id)
-        {
-            return _categoryRepository.FindElemByNumber(id);
+            if (!_carRepository.Contains(request))
+            {
+                _carRepository.UpdateElem(request, number);
+                return true;
+            } return false;
         }
 
         public ObservableCollection<Car> GetCars()
@@ -58,10 +49,23 @@ namespace AutoPark.Model.services
             return _carRepository.GetAllElems();
         }
 
+        public Car FindCarByNumber(string number)
+        {
+            return _carRepository.FindElemByNumber(number);
+        }
+
+        public List<Car> FindCarsByPartNumber(string number)
+        {
+            return _carRepository.GetAllElems()
+                .Where(car => car.Number.Contains(number))
+                .OrderBy(car => car.Number.IndexOf(number))
+                .ToList();
+        }
+
         public bool AddCategory(Category category)
         {
-            category.Id = Guid.NewGuid().ToString();
             if (!_categoryRepository.Contains(category)) {
+                category.Id = Guid.NewGuid().ToString();
                 _categoryRepository.AddElement(category);
                 return true;
             }
@@ -73,27 +77,36 @@ namespace AutoPark.Model.services
             {
                 return _categoryRepository.DeleteElemByNumber(categoryId);
             }
-            throw new ArgumentException("There are cars with category : " + _categoryRepository.FindElemByNumber(categoryId));
+            throw new ArgumentException(Properties.Resources.DeleteCategoryWithCars);
         }
 
-        public void UpdateCategory(Category category, string number)
+        public bool UpdateCategory(Category category, string number)
         {
-            if (!_categoryRepository.Contains(category) && isCarsWithCategoryId(_carRepository.GetAllElems().ToList(), number))
+            Category oldCategory = _categoryRepository.FindElemByNumber(number);
+            if (oldCategory != null && (!isCarsWithCategoryId(_carRepository.GetAllElems().ToList(), number) 
+                || (isCarsWithCategoryId(_carRepository.GetAllElems().ToList(), number) && oldCategory.Type.Equals(category.Type))))
             {
-                _categoryRepository.UpdateElem(category, number);
+                if (_categoryRepository.FindElemByNumber(category.Id) != null)
+                {
+                    _categoryRepository.UpdateElem(category, number);
+                    return true;
+                }
+                return false;
             }
             else
             {
-                throw new ArgumentException("Category with this name already exists or an attempt to change the car type, if there is an cars.");
+                throw new ArgumentException(Properties.Resources.UpdateCategoryBadCarType);
             }
+            
         }
 
-        public List<Car> FindCarsByPartNumber(string number)
+        public ObservableCollection<Category> GetCategories() {
+            return _categoryRepository.GetAllElems();
+        }
+
+        public Category FindCategoryById(string id)
         {
-            return _carRepository.GetAllElems()
-                .Where(car => car.Number.Contains(number))
-                .OrderBy(car => car.Number.IndexOf(number))
-                .ToList();
+            return _categoryRepository.FindElemByNumber(id);
         }
 
         public List<TypeCar> GetCarTypes()
@@ -108,6 +121,23 @@ namespace AutoPark.Model.services
 
         private bool isCarsWithCategoryId(List<Car> cars, string categoryId) {
             return cars.Where(car => car.CategoryId.Equals(categoryId)).Count() > 0;
+        }
+
+        public ObservableCollection<CarPicture> GetPictures() {
+            return _imageRepository.GetAllElems();
+        }
+
+        public CarPicture GetImageByNumber(string number) {
+            return _imageRepository.FindElemByNumber(number);
+        }
+
+        public void SavePicture(CarPicture image)
+        {
+            _imageRepository.AddElement(image);
+        }
+
+        public bool HasCarImage(string number) {
+            return _imageRepository.GetAllElems().Where(picture => picture.Number.Equals(number)).Count() > 0;
         }
     }
 }

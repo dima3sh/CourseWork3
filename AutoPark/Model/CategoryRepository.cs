@@ -1,11 +1,9 @@
 ﻿using AutoPark.Entity;
 using Model;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoPark.Model
 {
@@ -16,11 +14,11 @@ namespace AutoPark.Model
         public CategoryRepository()
         {
             _dataBase = DaoXml.GetDataBase();
+            _dataBase.Categories.CollectionChanged += SaveChanges;
         }
         public void AddElement(Category obj)
         {
             _dataBase.Categories.Add(obj);
-            DaoXml.saveAsync();
         }
 
         public bool Contains(Category obj)
@@ -33,7 +31,6 @@ namespace AutoPark.Model
             Category category = _dataBase.Categories.Where(x => x.Id.Equals(categoryId)).First();
             if (category != null) {
                 _dataBase.Categories.Remove(category);
-                DaoXml.saveAsync();
                 return true;
             }
             return false;
@@ -58,6 +55,9 @@ namespace AutoPark.Model
                 _dataBase.Categories.Remove(category);
                 _dataBase.Categories.Add(newObj);
             }
+        }
+        private void SaveChanges(object sender, NotifyCollectionChangedEventArgs e)
+        {
             DaoXml.saveAsync();
         }
     }

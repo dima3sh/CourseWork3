@@ -1,14 +1,10 @@
 ﻿using AutoPark.Entity;
-using AutoPark.Model;
 using AutoPark.Model.services;
 using AutoPark.View;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AutoPark.Presenters
 {
@@ -22,15 +18,16 @@ namespace AutoPark.Presenters
             _service = service;
             _service.GetCars().CollectionChanged += UpdateParkForm;
             _service.GetCategories().CollectionChanged += UpdateParkForm;
+            _service.GetPictures().CollectionChanged += UpdateParkForm;
         }
 
         public void CloseForm()
         {
-            throw new NotImplementedException();
+            _view.CloseForm();
         }
 
         private void UpdateParkForm(object sender, NotifyCollectionChangedEventArgs e) {
-            _view.UpdateParkView(GetCars());
+            _view.UpdateParkView();
         }
 
         public void ShowCarView()
@@ -84,15 +81,21 @@ namespace AutoPark.Presenters
             return ConvertCars(_service.FindCarsByPartNumber(number));
         }
 
+        public Bitmap FindPictureByNumber(string number) {
+            CarPicture img = _service.GetImageByNumber(number);
+            return img != null ? img.Picture : null;
+        }
+
         private List<string[]> ConvertCars(ICollection cars) {
             List<string[]> result = new List<string[]>();
             foreach (Car car in cars)
             {
-                string[] s = new string[4];
-                s[0] = car.Number;
-                s[1] = car.Model;
-                s[2] = _service.FindCategoryById(car.CategoryId) != null ? _service.FindCategoryById(car.CategoryId).Name : "";
-                s[3] = car.Type.ToString();
+                string[] s = new string[5];
+                s[0] = "";
+                s[1] = car.Number;
+                s[2] = car.Model;
+                s[3] = _service.FindCategoryById(car.CategoryId) != null ? _service.FindCategoryById(car.CategoryId).Name : "";
+                s[4] = car.Type.ToString();
                 result.Add(s);
             }
             return result;

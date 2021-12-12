@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<DataBase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Cars />
+  <Categories>
+    <Category>
+      <Name>Micro</Name>
+      <Id>8f0d97d6-ea93-4575-a6d0-8307e8fc8792</Id>
+      <Type>PASSENGER_CAR</Type>
+    </Category>
+    <Category>
+      <Name>Universal</Name>
+      <Id>58f4a676-c43a-41d0-9d19-32a3e4a376f5</Id>
+      <Type>PASSENGER_CAR</Type>
+    </Category>
+    <Category>
+      <Name>Van</Name>
+      <Id>3c97073a-c467-4067-98bc-00faed365fb8</Id>
+      <Type>TRUCK</Type>
+    </Category>
+  </Categories>
+  <Pictures />
+</DataBase>
