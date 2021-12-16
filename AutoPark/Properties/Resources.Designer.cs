@@ -160,6 +160,15 @@ namespace AutoPark.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Car number is Invalid!.
+        /// </summary>
+        internal static string InvalidCarNumber {
+            get {
+                return ResourceManager.GetString("InvalidCarNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Category name is invalid!.
         /// </summary>
         internal static string InvalidCategoryName {
@@ -174,6 +183,33 @@ namespace AutoPark.Properties {
         internal static string InvalidData {
             get {
                 return ResourceManager.GetString("InvalidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Model name is invalid!.
+        /// </summary>
+        internal static string InvalidModelName {
+            get {
+                return ResourceManager.GetString("InvalidModelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Type car isn&apos;t selected!.
+        /// </summary>
+        internal static string InvalidTypeCar {
+            get {
+                return ResourceManager.GetString("InvalidTypeCar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Category isn&apos;t selected!.
+        /// </summary>
+        internal static string SelectCategory {
+            get {
+                return ResourceManager.GetString("SelectCategory", resourceCulture);
             }
         }
         

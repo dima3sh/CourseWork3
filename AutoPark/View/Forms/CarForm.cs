@@ -25,23 +25,17 @@ namespace AutoPark
             InitializeComponent();
             _isEditForm = false;
             _oldNumber = null;
-            Load += LoadTypeCar;            
+            Load += LoadTypeCar;
         }
 
         public CarForm(Car car)
         {
             InitializeComponent();
-            
             FillFieldEditCar(car);
             _oldNumber = car.Number;            
             _isEditForm = true;    
-            _oldCategory = car.CategoryId;            
+            _oldCategory = car.CategoryId;
             Load += LoadCategory;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void LoadTypeCar(object sender, EventArgs e)
@@ -79,17 +73,18 @@ namespace AutoPark
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Car car = GetCar();
-            if (ValidaterUtil.ValidateCar(car)) {
+            if (ValidateForm())
+            {
+                Car car = GetCar();
                 if (_isEditForm)
                 {
                     Presenter.EditCar(car, _oldNumber);
-                } else {
+                }
+                else
+                {
                     Presenter.AddCar(car);
                 }
-            } else { 
-                ShowMessage(Properties.Resources.InvalidData);
-            }
+            } 
         }
 
         private string GetCategoryId() {
@@ -101,6 +96,8 @@ namespace AutoPark
         {
             CategoryComboBox.Items.Clear();
             TypeCar type = (TypeCar)ComboBoxTypeCar.SelectedItem;
+            ComboBoxTypeCar.IsValid = true;
+            InvalidTypeBox.Text = "";
             LoadCategories(type);
             CategoryComboBox.SelectedItem = Presenter.FindCategoryById(_oldCategory);
         }
@@ -136,6 +133,7 @@ namespace AutoPark
             else {
                 car = new Truck();
             }
+            
             car.Number = CarNumber.Text;
             car.Model = CarModel.Text;
             car.CategoryId = GetCategoryId();           
@@ -157,6 +155,40 @@ namespace AutoPark
             }
             button1.Text = "Edit";
             ComboBoxTypeCar.Enabled = false;
+        }
+
+        private void CarModel_TextChanged_1(object sender, EventArgs e)
+        {
+            CarModel.IsValid =  ValidaterUtil.IsValidString(CarModel.Text, "^.*$") || CarModel.Text.Trim() == "";
+            ShowInvalidText();
+        }
+
+        private void CarNumber_TextChanged(object sender, EventArgs e)
+        {
+            CarNumber.IsValid = ValidaterUtil.IsValidString(CarNumber.Text, "^[A-Z0-9-]{4,10}$") || CarNumber.Text.Trim() == "";
+            ShowInvalidText();
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CategoryComboBox.IsValid = true;
+            InvalidCategoryText.Text = "";
+        }
+
+        private void ShowInvalidText() {
+            InvalidModelText.Text = !CarModel.IsValid ? Properties.Resources.InvalidModelName : "";
+            InvalidCarNumberText.Text = !CarNumber.IsValid ? Properties.Resources.InvalidCarNumber : "";
+            InvalidCategoryText.Text = !CategoryComboBox.IsValid ? Properties.Resources.SelectCategory : "";
+            InvalidTypeBox.Text = !ComboBoxTypeCar.IsValid ? Properties.Resources.InvalidTypeCar : "";
+        }
+
+        private bool ValidateForm() {
+            ComboBoxTypeCar.IsValid = ComboBoxTypeCar.SelectedItem != null;
+            CategoryComboBox.IsValid = CategoryComboBox.SelectedItem != null;
+            CarModel.IsValid = CarModel.IsValid && CarModel.Text.Trim() != "";
+            CarNumber.IsValid = CarNumber.IsValid && CarNumber.Text.Trim() != "";
+            ShowInvalidText();
+            return CarModel.IsValid && CarModel.Text.Trim() != "" && CarNumber.IsValid && CarNumber.Text.Trim() != "" && CategoryComboBox.SelectedItem != null;
         }
     }
 }

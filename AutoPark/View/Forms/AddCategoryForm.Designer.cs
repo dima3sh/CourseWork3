@@ -1,4 +1,6 @@
 ﻿
+using AutoPark.Entity;
+
 namespace AutoPark.View
 {
     partial class AddCategoryForm
@@ -33,9 +35,11 @@ namespace AutoPark.View
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
-            this.TxtBoxName = new System.Windows.Forms.TextBox();
+            this.TxtBoxName = new AutoPark.Entity.ExTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.ComboboxType = new System.Windows.Forms.ComboBox();
+            this.ComboboxType = new AutoPark.Entity.ExtComboBox();
+            this.InvalidCategoryText = new System.Windows.Forms.Label();
+            this.InvalidCarType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +66,7 @@ namespace AutoPark.View
             // 
             this.BtnAdd.BackColor = System.Drawing.SystemColors.Control;
             this.BtnAdd.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.BtnAdd.Location = new System.Drawing.Point(122, 181);
+            this.BtnAdd.Location = new System.Drawing.Point(122, 206);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(97, 24);
             this.BtnAdd.TabIndex = 2;
@@ -73,15 +77,19 @@ namespace AutoPark.View
             // TxtBoxName
             // 
             this.TxtBoxName.BackColor = System.Drawing.SystemColors.Menu;
+            this.TxtBoxName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.TxtBoxName.IsValid = true;
             this.TxtBoxName.Location = new System.Drawing.Point(50, 68);
+            this.TxtBoxName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.TxtBoxName.Name = "TxtBoxName";
             this.TxtBoxName.Size = new System.Drawing.Size(241, 26);
             this.TxtBoxName.TabIndex = 3;
+            this.TxtBoxName.TextChanged += new System.EventHandler(this.TxtBoxName_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 104);
+            this.label3.Location = new System.Drawing.Point(46, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 18);
             this.label3.TabIndex = 4;
@@ -90,18 +98,46 @@ namespace AutoPark.View
             // ComboboxType
             // 
             this.ComboboxType.BackColor = System.Drawing.SystemColors.Menu;
+            this.ComboboxType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.ComboboxType.FormattingEnabled = true;
-            this.ComboboxType.Location = new System.Drawing.Point(50, 125);
+            this.ComboboxType.IsValid = true;
+            this.ComboboxType.Location = new System.Drawing.Point(49, 131);
+            this.ComboboxType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.ComboboxType.Name = "ComboboxType";
             this.ComboboxType.Size = new System.Drawing.Size(241, 26);
             this.ComboboxType.TabIndex = 5;
+            this.ComboboxType.SelectedIndexChanged += new System.EventHandler(this.ComboboxType_SelectedIndexChanged);
+            // 
+            // InvalidCategoryText
+            // 
+            this.InvalidCategoryText.AutoSize = true;
+            this.InvalidCategoryText.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.InvalidCategoryText.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidCategoryText.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidCategoryText.Location = new System.Drawing.Point(46, 94);
+            this.InvalidCategoryText.Name = "InvalidCategoryText";
+            this.InvalidCategoryText.Size = new System.Drawing.Size(0, 16);
+            this.InvalidCategoryText.TabIndex = 6;
+            // 
+            // InvalidCarType
+            // 
+            this.InvalidCarType.AutoSize = true;
+            this.InvalidCarType.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.InvalidCarType.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidCarType.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidCarType.Location = new System.Drawing.Point(46, 157);
+            this.InvalidCarType.Name = "InvalidCarType";
+            this.InvalidCarType.Size = new System.Drawing.Size(0, 16);
+            this.InvalidCarType.TabIndex = 7;
             // 
             // AddCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(346, 218);
+            this.ClientSize = new System.Drawing.Size(346, 242);
+            this.Controls.Add(this.InvalidCarType);
+            this.Controls.Add(this.InvalidCategoryText);
             this.Controls.Add(this.ComboboxType);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TxtBoxName);
@@ -110,7 +146,7 @@ namespace AutoPark.View
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddCategoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Category";
@@ -125,8 +161,10 @@ namespace AutoPark.View
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnAdd;
-        private System.Windows.Forms.TextBox TxtBoxName;
+        private ExTextBox TxtBoxName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox ComboboxType;
+        private ExtComboBox ComboboxType;
+        private System.Windows.Forms.Label InvalidCategoryText;
+        private System.Windows.Forms.Label InvalidCarType;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
-using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using System;
 using System.Windows.Forms;
@@ -43,6 +42,7 @@ namespace AutoPark.View
                 TxtBoxName.Text = category.Name;
                 ComboBoxType.DataSource = Presenter.GetCarTypes();
                 ComboBoxType.SelectedItem = category.Type;
+                ValidateUpdateForm();
             }
         }
 
@@ -54,34 +54,47 @@ namespace AutoPark.View
         private void button2_Click(object sender, EventArgs e)
         {
             Category category = (Category)comboBox1.SelectedItem;
-            if (category != null)
+            comboBox1.IsValid = category != null;
+            if (ValidateDeleteForm())
             {
                 if (Presenter.DeleteCategory(category.Id))
                 {
                     Close();
                 }
             }
-            else {
-                ShowMessage("Category isn't selected!");
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Category obj = (Category)comboBox1.SelectedItem;
-            string name = TxtBoxName.Text.Trim();
-            if (obj != null && ValidaterUtil.IsValidString(name))
+            if (ValidateUpdateForm())
             {
                 Category category = new Category();
                 category.Id = obj.Id;
-                category.Name = name;
+                category.Name = TxtBoxName.Text.Trim();
                 category.Type = (TypeCar)ComboBoxType.SelectedItem;
                 Presenter.UpdateCategory(category);
                 Close();
-            }
-            else {
-                ShowMessage(Properties.Resources.InvalidData);
-            }
+            }          
+        }
+
+        private bool ValidateDeleteForm() {
+            InvalidCategoriesText.Text = Properties.Resources.SelectCategory;
+            return comboBox1.SelectedItem != null;
+        }
+
+        private bool ValidateUpdateForm() {
+            comboBox1.IsValid = comboBox1.SelectedItem != null;
+            ComboBoxType.IsValid = ComboBoxType.SelectedItem != null;
+            TxtBoxName.IsValid = TxtBoxName.Text.Trim() != "";
+            ShowInvalidText();
+            return comboBox1.IsValid && ComboBoxType.IsValid && TxtBoxName.IsValid;
+        }
+
+        private void ShowInvalidText() {
+            InvalidCategoriesText.Text = !comboBox1.IsValid ? Properties.Resources.SelectCategory : "";
+            InvalidCategory.Text = !ComboBoxType.IsValid ? Properties.Resources.InvalidTypeCar : "";
+            InvalidNameText.Text = !TxtBoxName.IsValid ? Properties.Resources.InvalidCategoryName : "";
         }
     }
 }

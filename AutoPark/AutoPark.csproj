@@ -98,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\CarPicture.cs" />
+    <Compile Include="View\Elems\ExtComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Elems\ExTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\PictureRepository.cs" />
     <Compile Include="Model\Utils\ValidaterUtil.cs" />
     <Compile Include="View\Forms\CarForm.cs">

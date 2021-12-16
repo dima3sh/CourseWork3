@@ -21,7 +21,8 @@ namespace AutoPark.Model.services
 
         public bool addCar(Car car)
         {
-            if (!_carRepository.Contains(car)) {
+            if (!_carRepository.Contains(car)) 
+            {
 
                 _carRepository.AddElement(car);
                 return true;

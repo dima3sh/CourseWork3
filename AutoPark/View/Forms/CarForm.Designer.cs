@@ -1,4 +1,6 @@
 ﻿
+using AutoPark.Entity;
+
 namespace AutoPark
 {
     partial class CarForm
@@ -31,18 +33,22 @@ namespace AutoPark
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarForm));
             this.label1 = new System.Windows.Forms.Label();
-            this.CarModel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CarNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
-            this.ComboBoxTypeCar = new System.Windows.Forms.ComboBox();
+            this.CategoryComboBox = new AutoPark.Entity.ExtComboBox();
+            this.ComboBoxTypeCar = new ExtComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.labelImageName = new System.Windows.Forms.Label();
+            this.InvalidModelText = new System.Windows.Forms.Label();
+            this.InvalidCarNumberText = new System.Windows.Forms.Label();
+            this.InvalidTypeBox = new System.Windows.Forms.Label();
+            this.InvalidCategoryText = new System.Windows.Forms.Label();
+            this.CarNumber = new AutoPark.Entity.ExTextBox();
+            this.CarModel = new AutoPark.Entity.ExTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -54,38 +60,21 @@ namespace AutoPark
             this.label1.Size = new System.Drawing.Size(51, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Model";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // CarModel
-            // 
-            this.CarModel.BackColor = System.Drawing.SystemColors.Menu;
-            this.CarModel.Location = new System.Drawing.Point(45, 63);
-            this.CarModel.Name = "CarModel";
-            this.CarModel.Size = new System.Drawing.Size(267, 26);
-            this.CarModel.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 92);
+            this.label2.Location = new System.Drawing.Point(42, 108);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 18);
             this.label2.TabIndex = 2;
             this.label2.Text = "Number";
             // 
-            // CarNumber
-            // 
-            this.CarNumber.BackColor = System.Drawing.SystemColors.Menu;
-            this.CarNumber.Location = new System.Drawing.Point(45, 113);
-            this.CarNumber.Name = "CarNumber";
-            this.CarNumber.Size = new System.Drawing.Size(267, 26);
-            this.CarNumber.TabIndex = 3;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 192);
+            this.label3.Location = new System.Drawing.Point(42, 234);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 18);
@@ -95,7 +84,7 @@ namespace AutoPark
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(106, 298);
+            this.button1.Location = new System.Drawing.Point(113, 399);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 30);
             this.button1.TabIndex = 6;
@@ -116,17 +105,21 @@ namespace AutoPark
             // CategoryComboBox
             // 
             this.CategoryComboBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.CategoryComboBox.BorderColor = System.Drawing.Color.Transparent;
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(45, 213);
+            this.CategoryComboBox.IsValid = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(45, 255);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(267, 26);
             this.CategoryComboBox.TabIndex = 8;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // ComboBoxTypeCar
             // 
             this.ComboBoxTypeCar.BackColor = System.Drawing.SystemColors.Menu;
             this.ComboBoxTypeCar.FormattingEnabled = true;
-            this.ComboBoxTypeCar.Location = new System.Drawing.Point(45, 163);
+            this.ComboBoxTypeCar.Location = new System.Drawing.Point(45, 192);
+            this.ComboBoxTypeCar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.ComboBoxTypeCar.Name = "ComboBoxTypeCar";
             this.ComboBoxTypeCar.Size = new System.Drawing.Size(267, 26);
             this.ComboBoxTypeCar.TabIndex = 9;
@@ -135,7 +128,7 @@ namespace AutoPark
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 142);
+            this.label5.Location = new System.Drawing.Point(42, 171);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 18);
@@ -145,7 +138,7 @@ namespace AutoPark
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(41, 242);
+            this.label6.Location = new System.Drawing.Point(42, 305);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 18);
             this.label6.TabIndex = 11;
@@ -153,7 +146,7 @@ namespace AutoPark
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(44, 263);
+            this.button2.Location = new System.Drawing.Point(45, 326);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 29);
             this.button2.TabIndex = 12;
@@ -165,18 +158,86 @@ namespace AutoPark
             // 
             this.labelImageName.AutoSize = true;
             this.labelImageName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labelImageName.Location = new System.Drawing.Point(130, 268);
+            this.labelImageName.Location = new System.Drawing.Point(131, 331);
             this.labelImageName.Name = "labelImageName";
             this.labelImageName.Size = new System.Drawing.Size(51, 18);
             this.labelImageName.TabIndex = 13;
             this.labelImageName.Text = "Image";
+            // 
+            // InvalidModelText
+            // 
+            this.InvalidModelText.AutoSize = true;
+            this.InvalidModelText.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidModelText.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidModelText.Location = new System.Drawing.Point(42, 89);
+            this.InvalidModelText.Name = "InvalidModelText";
+            this.InvalidModelText.Size = new System.Drawing.Size(0, 16);
+            this.InvalidModelText.TabIndex = 15;
+            // 
+            // InvalidCarNumberText
+            // 
+            this.InvalidCarNumberText.AutoSize = true;
+            this.InvalidCarNumberText.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidCarNumberText.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidCarNumberText.Location = new System.Drawing.Point(42, 155);
+            this.InvalidCarNumberText.Name = "InvalidCarNumberText";
+            this.InvalidCarNumberText.Size = new System.Drawing.Size(0, 16);
+            this.InvalidCarNumberText.TabIndex = 16;
+            // 
+            // InvalidTypeBox
+            // 
+            this.InvalidTypeBox.AutoSize = true;
+            this.InvalidTypeBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidTypeBox.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidTypeBox.Location = new System.Drawing.Point(42, 218);
+            this.InvalidTypeBox.Name = "InvalidTypeBox";
+            this.InvalidTypeBox.Size = new System.Drawing.Size(0, 16);
+            this.InvalidTypeBox.TabIndex = 17;
+            // 
+            // InvalidCategoryText
+            // 
+            this.InvalidCategoryText.AutoSize = true;
+            this.InvalidCategoryText.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InvalidCategoryText.ForeColor = System.Drawing.Color.IndianRed;
+            this.InvalidCategoryText.Location = new System.Drawing.Point(42, 284);
+            this.InvalidCategoryText.Name = "InvalidCategoryText";
+            this.InvalidCategoryText.Size = new System.Drawing.Size(0, 16);
+            this.InvalidCategoryText.TabIndex = 18;
+            // 
+            // CarNumber
+            // 
+            this.CarNumber.BackColor = System.Drawing.SystemColors.Menu;
+            this.CarNumber.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.CarNumber.IsValid = true;
+            this.CarNumber.Location = new System.Drawing.Point(45, 129);
+            this.CarNumber.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.CarNumber.Name = "CarNumber";
+            this.CarNumber.Size = new System.Drawing.Size(267, 26);
+            this.CarNumber.TabIndex = 3;
+            this.CarNumber.TextChanged += new System.EventHandler(this.CarNumber_TextChanged);
+            // 
+            // CarModel
+            // 
+            this.CarModel.BackColor = System.Drawing.SystemColors.Menu;
+            this.CarModel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.CarModel.IsValid = true;
+            this.CarModel.Location = new System.Drawing.Point(45, 63);
+            this.CarModel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.CarModel.Name = "CarModel";
+            this.CarModel.Size = new System.Drawing.Size(267, 26);
+            this.CarModel.TabIndex = 1;
+            this.CarModel.TextChanged += new System.EventHandler(this.CarModel_TextChanged_1);
             // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(368, 352);
+            this.ClientSize = new System.Drawing.Size(368, 441);
+            this.Controls.Add(this.InvalidCategoryText);
+            this.Controls.Add(this.InvalidTypeBox);
+            this.Controls.Add(this.InvalidCarNumberText);
+            this.Controls.Add(this.InvalidModelText);
             this.Controls.Add(this.labelImageName);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label6);
@@ -204,17 +265,21 @@ namespace AutoPark
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox CarModel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox CarNumber;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox CategoryComboBox;
-        private System.Windows.Forms.ComboBox ComboBoxTypeCar;
+        private ExtComboBox CategoryComboBox;
+        private ExtComboBox ComboBoxTypeCar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label labelImageName;
+        private System.Windows.Forms.Label InvalidModelText;
+        private ExTextBox CarModel;
+        private ExTextBox CarNumber;
+        private System.Windows.Forms.Label InvalidCarNumberText;
+        private System.Windows.Forms.Label InvalidTypeBox;
+        private System.Windows.Forms.Label InvalidCategoryText;
     }
 }
