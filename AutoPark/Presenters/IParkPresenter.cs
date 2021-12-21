@@ -8,8 +8,7 @@ namespace AutoPark.Presenters
         void ShowCarView();
         void ShowCarView(string number);
 
-        void ShowAddCategoryView();
-        void ShowEditCategoryView();
+        void ShowCategoriesView();
         List<string[]> GetCars();
         List<string[]> GetCarsByPartNumber(string number);
         void DeleteCar(string number);

@@ -4,11 +4,12 @@ using AutoPark.Model.services;
 using AutoPark.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace AutoPark.Presenters
 {
-    class CategoryPresenter : ICategoryPresenter
+    public class CategoryPresenter : ICategoryPresenter
     {
         private ICategoryView _view;
         private IService _service;
@@ -17,6 +18,7 @@ namespace AutoPark.Presenters
         {
             _view = carForm;
             _service = service;
+            _service.GetCategories().CollectionChanged += UpdateCategoriesView;
         }
 
         public void AddCategory(Category category)
@@ -44,7 +46,7 @@ namespace AutoPark.Presenters
         public void ShowForm()
         {
             _view.ShowForm();
-        }
+        }        
 
         public bool DeleteCategory(string categoryId) {
             try
@@ -78,6 +80,27 @@ namespace AutoPark.Presenters
         public List<TypeCar> GetCarTypes()
         {
             return _service.GetCarTypes();
+        }
+
+        public void ShowAddCategoryView()
+        {
+            ShowCategoryForm(new AddCategoryForm());
+        }
+        private void ShowCategoryForm(ICategoryView categoryView)
+        {
+            ICategoryPresenter carPresenter = new CategoryPresenter(categoryView, _service);
+            categoryView.Presenter = carPresenter;
+            categoryView.ShowForm();
+        }
+
+        public void ShowEditCategoryView(Category category)
+        {
+            ShowCategoryForm(new EditCategoryForm(category));
+        }
+
+        private void UpdateCategoriesView(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //_view.UpdateCategories();
         }
     }
 }

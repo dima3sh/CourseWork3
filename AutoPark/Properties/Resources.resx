@@ -151,7 +151,7 @@
     <value>c:\\</value>
   </data>
   <data name="InvalidCarNumber" xml:space="preserve">
-    <value>Car number is Invalid!</value>
+    <value>Number is invalid! Use only A-Z and 0-9</value>
   </data>
   <data name="InvalidCategoryName" xml:space="preserve">
     <value>Category name is invalid!</value>

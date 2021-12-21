@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace AutoPark.Model.services
 {
-    interface IService
+    public interface IService
     {
         bool addCar(Car car);
 
@@ -38,6 +38,8 @@ namespace AutoPark.Model.services
         CarPicture GetImageByNumber(string number);
 
         void SavePicture(CarPicture image);
+
+        void UpdatePicture(CarPicture picture);
 
         bool HasCarImage(string number);
     }

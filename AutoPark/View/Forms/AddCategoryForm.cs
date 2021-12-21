@@ -1,5 +1,6 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
+using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using System;
 using System.Windows.Forms;
@@ -56,6 +57,7 @@ namespace AutoPark.View
         private void TxtBoxName_TextChanged(object sender, EventArgs e)
         {
             InvalidCategoryText.Text = "";
+            CheckAddButton();
         }
 
         private void ShowInvalidText() {
@@ -65,7 +67,18 @@ namespace AutoPark.View
 
         private void ComboboxType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ComboboxType.IsValid = ComboboxType.SelectedItem != null;
             ShowInvalidText();
+            CheckAddButton();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CloseForm();
+        }
+
+        private void CheckAddButton() {
+            BtnAdd.Enabled = ValidaterUtil.IsValidString(TxtBoxName.Text) && ComboboxType.SelectedItem != null;
         }
     }
 }

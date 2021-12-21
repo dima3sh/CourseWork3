@@ -2,8 +2,7 @@
 
 namespace AutoPark.View
 {
-    interface ICategoryView : IView<ICategoryPresenter>
+    public interface ICategoryView : IView<ICategoryPresenter>
     {
-        
     }
 }

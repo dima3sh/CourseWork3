@@ -2,7 +2,7 @@
 
 namespace AutoPark.View
 {
-    interface IView<T> where T : IPresenter
+    public interface IView<T> where T : IPresenter
     {
         T Presenter { set; }
         void ShowForm();

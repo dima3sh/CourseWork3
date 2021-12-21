@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoPark.Model
 {
-    class PictureRepository : IRepository<CarPicture>
+    public class PictureRepository : IRepository<CarPicture>
     {
         private DataBase _dataBase;
         public PictureRepository()
@@ -28,7 +28,6 @@ namespace AutoPark.Model
         public bool DeleteElemByNumber(string number)
         {
             CarPicture img = FindElemByNumber(number);
-            DaoXml.saveAsync();
             return _dataBase.Pictures.Remove(img);
         }
 
@@ -50,12 +49,12 @@ namespace AutoPark.Model
             if (img != null)
             {
                 _dataBase.Pictures.Remove(img);
-                _dataBase.Pictures.Add(newObj);
             }
+                _dataBase.Pictures.Add(newObj);
         }
 
         private void SaveChanges(object sender, NotifyCollectionChangedEventArgs e) {
-            DaoXml.saveAsync();
+            DaoXml.Save();
         }
     }
 }

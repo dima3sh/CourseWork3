@@ -8,6 +8,10 @@ namespace AutoPark.Presenters
     {
         void AddCategory(Category category);
 
+        void ShowAddCategoryView();
+
+        void ShowEditCategoryView(Category category);
+
         List<Category> GetCategories();
 
         bool DeleteCategory(string categoryId);

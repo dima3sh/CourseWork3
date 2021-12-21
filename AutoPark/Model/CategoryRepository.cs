@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoPark.Model
 {
-    class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : IRepository<Category>
     {
 
         private DataBase _dataBase;
@@ -58,7 +58,7 @@ namespace AutoPark.Model
         }
         private void SaveChanges(object sender, NotifyCollectionChangedEventArgs e)
         {
-            DaoXml.saveAsync();
+            DaoXml.Save();
         }
     }
 }

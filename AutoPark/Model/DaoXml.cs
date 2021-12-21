@@ -20,7 +20,7 @@ namespace Model
         {
             _filePath = @Resources.filePath;
             _defaultPath = @Resources.defaultPath;
-            InitializeServiceAsync();
+            InitializeService();
         }
 
         public static DataBase GetDataBase()
@@ -35,7 +35,7 @@ namespace Model
             return _dataBase;
         }
 
-        private void InitializeServiceAsync() 
+        private void InitializeService() 
         {
             XmlSerializer formatter = new XmlSerializer(typeof(DataBase));
 
@@ -59,7 +59,7 @@ namespace Model
             return dataBase;
         }
 
-        public static void saveAsync()
+        public static void Save()
         {
             XmlSerializer formatter = new XmlSerializer(typeof(DataBase));
 

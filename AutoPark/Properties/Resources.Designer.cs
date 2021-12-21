@@ -160,7 +160,7 @@ namespace AutoPark.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Car number is Invalid!.
+        ///   Ищет локализованную строку, похожую на Number is invalid! Use only A-Z and 0-9.
         /// </summary>
         internal static string InvalidCarNumber {
             get {

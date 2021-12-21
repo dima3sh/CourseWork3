@@ -53,7 +53,7 @@ namespace AutoPark.Model
         }
 
         private void SaveChanges(object sender, NotifyCollectionChangedEventArgs e) {
-            DaoXml.saveAsync();
+            DaoXml.Save();
         }
     }
 }

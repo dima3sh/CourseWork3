@@ -38,7 +38,7 @@ namespace AutoPark
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.CategoryComboBox = new AutoPark.Entity.ExtComboBox();
-            this.ComboBoxTypeCar = new ExtComboBox();
+            this.ComboBoxTypeCar = new AutoPark.Entity.ExtComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,6 +49,7 @@ namespace AutoPark
             this.InvalidCategoryText = new System.Windows.Forms.Label();
             this.CarNumber = new AutoPark.Entity.ExTextBox();
             this.CarModel = new AutoPark.Entity.ExTextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -84,7 +85,8 @@ namespace AutoPark
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(113, 399);
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(55, 399);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 30);
             this.button1.TabIndex = 6;
@@ -106,6 +108,7 @@ namespace AutoPark
             // 
             this.CategoryComboBox.BackColor = System.Drawing.SystemColors.Menu;
             this.CategoryComboBox.BorderColor = System.Drawing.Color.Transparent;
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.IsValid = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(45, 255);
@@ -117,7 +120,10 @@ namespace AutoPark
             // ComboBoxTypeCar
             // 
             this.ComboBoxTypeCar.BackColor = System.Drawing.SystemColors.Menu;
+            this.ComboBoxTypeCar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.ComboBoxTypeCar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxTypeCar.FormattingEnabled = true;
+            this.ComboBoxTypeCar.IsValid = true;
             this.ComboBoxTypeCar.Location = new System.Drawing.Point(45, 192);
             this.ComboBoxTypeCar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.ComboBoxTypeCar.Name = "ComboBoxTypeCar";
@@ -228,12 +234,24 @@ namespace AutoPark
             this.CarModel.TabIndex = 1;
             this.CarModel.TextChanged += new System.EventHandler(this.CarModel_TextChanged_1);
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.Control;
+            this.button3.Location = new System.Drawing.Point(182, 399);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(111, 30);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "Cancel";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(368, 441);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.InvalidCategoryText);
             this.Controls.Add(this.InvalidTypeBox);
             this.Controls.Add(this.InvalidCarNumberText);
@@ -281,5 +299,6 @@ namespace AutoPark
         private System.Windows.Forms.Label InvalidCarNumberText;
         private System.Windows.Forms.Label InvalidTypeBox;
         private System.Windows.Forms.Label InvalidCategoryText;
+        private System.Windows.Forms.Button button3;
     }
 }

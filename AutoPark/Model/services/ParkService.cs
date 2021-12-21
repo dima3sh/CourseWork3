@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoPark.Model.services
 {
-    class ParkService : IService
+    public class ParkService : IService
     {
         private IRepository<Car> _carRepository;
         private IRepository<Category> _categoryRepository;
@@ -38,7 +38,7 @@ namespace AutoPark.Model.services
 
         public bool EditCar(Car request, string number)
         {
-            if (!_carRepository.Contains(request))
+            if (!_carRepository.Contains(request) || request.Number.Equals(number))
             {
                 _carRepository.UpdateElem(request, number);
                 return true;
@@ -139,6 +139,11 @@ namespace AutoPark.Model.services
 
         public bool HasCarImage(string number) {
             return _imageRepository.GetAllElems().Where(picture => picture.Number.Equals(number)).Count() > 0;
+        }
+
+        public void UpdatePicture(CarPicture picture)
+        {
+            _imageRepository.UpdateElem(picture, picture.Number);
         }
     }
 }

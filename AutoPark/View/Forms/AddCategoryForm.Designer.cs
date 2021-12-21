@@ -35,11 +35,12 @@ namespace AutoPark.View
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
-            this.TxtBoxName = new AutoPark.Entity.ExTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.ComboboxType = new AutoPark.Entity.ExtComboBox();
             this.InvalidCategoryText = new System.Windows.Forms.Label();
             this.InvalidCarType = new System.Windows.Forms.Label();
+            this.ComboboxType = new AutoPark.Entity.ExtComboBox();
+            this.TxtBoxName = new AutoPark.Entity.ExTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,26 +66,15 @@ namespace AutoPark.View
             // BtnAdd
             // 
             this.BtnAdd.BackColor = System.Drawing.SystemColors.Control;
+            this.BtnAdd.Enabled = false;
             this.BtnAdd.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.BtnAdd.Location = new System.Drawing.Point(122, 206);
+            this.BtnAdd.Location = new System.Drawing.Point(73, 206);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(97, 24);
             this.BtnAdd.TabIndex = 2;
             this.BtnAdd.Text = "Add ";
             this.BtnAdd.UseVisualStyleBackColor = false;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-            // 
-            // TxtBoxName
-            // 
-            this.TxtBoxName.BackColor = System.Drawing.SystemColors.Menu;
-            this.TxtBoxName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.TxtBoxName.IsValid = true;
-            this.TxtBoxName.Location = new System.Drawing.Point(50, 68);
-            this.TxtBoxName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.TxtBoxName.Name = "TxtBoxName";
-            this.TxtBoxName.Size = new System.Drawing.Size(241, 26);
-            this.TxtBoxName.TabIndex = 3;
-            this.TxtBoxName.TextChanged += new System.EventHandler(this.TxtBoxName_TextChanged);
             // 
             // label3
             // 
@@ -94,19 +84,6 @@ namespace AutoPark.View
             this.label3.Size = new System.Drawing.Size(71, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "Type Car";
-            // 
-            // ComboboxType
-            // 
-            this.ComboboxType.BackColor = System.Drawing.SystemColors.Menu;
-            this.ComboboxType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.ComboboxType.FormattingEnabled = true;
-            this.ComboboxType.IsValid = true;
-            this.ComboboxType.Location = new System.Drawing.Point(49, 131);
-            this.ComboboxType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.ComboboxType.Name = "ComboboxType";
-            this.ComboboxType.Size = new System.Drawing.Size(241, 26);
-            this.ComboboxType.TabIndex = 5;
-            this.ComboboxType.SelectedIndexChanged += new System.EventHandler(this.ComboboxType_SelectedIndexChanged);
             // 
             // InvalidCategoryText
             // 
@@ -130,12 +107,51 @@ namespace AutoPark.View
             this.InvalidCarType.Size = new System.Drawing.Size(0, 16);
             this.InvalidCarType.TabIndex = 7;
             // 
+            // ComboboxType
+            // 
+            this.ComboboxType.BackColor = System.Drawing.SystemColors.Menu;
+            this.ComboboxType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.ComboboxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboboxType.FormattingEnabled = true;
+            this.ComboboxType.IsValid = true;
+            this.ComboboxType.Location = new System.Drawing.Point(49, 131);
+            this.ComboboxType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.ComboboxType.Name = "ComboboxType";
+            this.ComboboxType.Size = new System.Drawing.Size(241, 26);
+            this.ComboboxType.TabIndex = 5;
+            this.ComboboxType.SelectedIndexChanged += new System.EventHandler(this.ComboboxType_SelectedIndexChanged);
+            // 
+            // TxtBoxName
+            // 
+            this.TxtBoxName.BackColor = System.Drawing.SystemColors.Menu;
+            this.TxtBoxName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.TxtBoxName.IsValid = true;
+            this.TxtBoxName.Location = new System.Drawing.Point(50, 68);
+            this.TxtBoxName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.TxtBoxName.Name = "TxtBoxName";
+            this.TxtBoxName.Size = new System.Drawing.Size(241, 26);
+            this.TxtBoxName.TabIndex = 3;
+            this.TxtBoxName.TextChanged += new System.EventHandler(this.TxtBoxName_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Location = new System.Drawing.Point(176, 206);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(97, 24);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AddCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(346, 242);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.InvalidCarType);
             this.Controls.Add(this.InvalidCategoryText);
             this.Controls.Add(this.ComboboxType);
@@ -166,5 +182,6 @@ namespace AutoPark.View
         private ExtComboBox ComboboxType;
         private System.Windows.Forms.Label InvalidCategoryText;
         private System.Windows.Forms.Label InvalidCarType;
+        private System.Windows.Forms.Button button1;
     }
 }

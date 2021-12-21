@@ -2,7 +2,7 @@
 
 namespace AutoPark.Model
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         bool Contains(T obj);
         void AddElement(T obj);

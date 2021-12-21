@@ -34,14 +34,14 @@ namespace AutoPark.View
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCategoryForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new ExtComboBox();
+            this.comboBox1 = new AutoPark.Entity.ExtComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TxtBoxName = new ExTextBox();
+            this.TxtBoxName = new AutoPark.Entity.ExTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.Type = new System.Windows.Forms.Label();
-            this.ComboBoxType = new ExtComboBox();
+            this.ComboBoxType = new AutoPark.Entity.ExtComboBox();
             this.InvalidCategoriesText = new System.Windows.Forms.Label();
             this.InvalidCategory = new System.Windows.Forms.Label();
             this.InvalidNameText = new System.Windows.Forms.Label();
@@ -69,7 +69,10 @@ namespace AutoPark.View
             // 
             // comboBox1
             // 
+            this.comboBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.IsValid = true;
             this.comboBox1.Location = new System.Drawing.Point(48, 83);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.comboBox1.Name = "comboBox1";
@@ -88,6 +91,8 @@ namespace AutoPark.View
             // 
             // TxtBoxName
             // 
+            this.TxtBoxName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.TxtBoxName.IsValid = true;
             this.TxtBoxName.Location = new System.Drawing.Point(47, 212);
             this.TxtBoxName.Name = "TxtBoxName";
             this.TxtBoxName.Size = new System.Drawing.Size(257, 26);
@@ -137,12 +142,16 @@ namespace AutoPark.View
             // 
             // ComboBoxType
             // 
+            this.ComboBoxType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.ComboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxType.FormattingEnabled = true;
+            this.ComboBoxType.IsValid = true;
             this.ComboBoxType.Location = new System.Drawing.Point(47, 149);
             this.ComboBoxType.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.ComboBoxType.Name = "ComboBoxType";
             this.ComboBoxType.Size = new System.Drawing.Size(257, 26);
             this.ComboBoxType.TabIndex = 9;
+            this.ComboBoxType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxType_SelectedIndexChanged);
             // 
             // InvalidCategoriesText
             // 

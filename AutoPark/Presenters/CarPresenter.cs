@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AutoPark.Presenters
 {
-    class CarPresenter : ICarPresenter
+    public class CarPresenter : ICarPresenter
     {
         private ICarView _view;
         private IService _service;
@@ -72,12 +72,18 @@ namespace AutoPark.Presenters
 
         
         public void SaveCarImage(Bitmap image, string number) {
-            if (image != null && number != null && number.Trim() != "")
+            if (image != null)
             {
                 CarPicture img = new CarPicture();
                 img.Picture = image;
                 img.Number = number;
-                _service.SavePicture(img);
+                if (!HasImage(number))
+                {
+                    _service.SavePicture(img);
+                }
+                else {
+                    _service.UpdatePicture(img);
+                }
             }
         }
 

@@ -5,8 +5,8 @@ using System.Xml.Serialization;
 namespace AutoPark.Entity
 {
     [Serializable]
-    [XmlInclude(typeof(PassengerCar))]
     [XmlInclude(typeof(Truck))]
+    [XmlInclude(typeof(PassengerCar))]
     public abstract class Car
     {
         public string Model { get; set; }
@@ -19,6 +19,6 @@ namespace AutoPark.Entity
         {
             return Number.Equals(((Car)obj).Number);
         }
-        public TypeCar Type { get; set; }
+        public TypeCar Type { get;}
     }
 }

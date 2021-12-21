@@ -2,7 +2,7 @@
 
 namespace AutoPark.View
 {
-    interface ICarView : IView<ICarPresenter>
+    public interface ICarView : IView<ICarPresenter>
     {
         void SaveImage(string number);
     }

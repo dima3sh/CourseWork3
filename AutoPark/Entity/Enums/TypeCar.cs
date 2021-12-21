@@ -5,7 +5,7 @@ namespace AutoPark.Entity.Enums
     [Serializable]
     public enum TypeCar
     {
-        TRUCK,
-        PASSENGER_CAR
+        PASSENGER_CAR,
+        TRUCK
     }
 }

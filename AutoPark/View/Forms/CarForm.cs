@@ -100,6 +100,7 @@ namespace AutoPark
             InvalidTypeBox.Text = "";
             LoadCategories(type);
             CategoryComboBox.SelectedItem = Presenter.FindCategoryById(_oldCategory);
+            CheckButton();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -108,7 +109,7 @@ namespace AutoPark
             OpenFileDialog  openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.InitialDirectory = Properties.Resources.InitialDirectoryPath;
-            openFileDialog1.Filter = "Image files (*.*)|*.png";
+            openFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
@@ -161,18 +162,21 @@ namespace AutoPark
         {
             CarModel.IsValid =  ValidaterUtil.IsValidString(CarModel.Text, "^.*$") || CarModel.Text.Trim() == "";
             ShowInvalidText();
+            CheckButton();
         }
 
         private void CarNumber_TextChanged(object sender, EventArgs e)
         {
-            CarNumber.IsValid = ValidaterUtil.IsValidString(CarNumber.Text, "^[A-Z0-9-]{4,10}$") || CarNumber.Text.Trim() == "";
+            CarNumber.IsValid = ValidaterUtil.IsValidString(CarNumber.Text, "^[A-Z0-9]{4,10}$") || CarNumber.Text.Trim() == "";
             ShowInvalidText();
+            CheckButton();
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             CategoryComboBox.IsValid = true;
             InvalidCategoryText.Text = "";
+            CheckButton();
         }
 
         private void ShowInvalidText() {
@@ -189,6 +193,17 @@ namespace AutoPark
             CarNumber.IsValid = CarNumber.IsValid && CarNumber.Text.Trim() != "";
             ShowInvalidText();
             return CarModel.IsValid && CarModel.Text.Trim() != "" && CarNumber.IsValid && CarNumber.Text.Trim() != "" && CategoryComboBox.SelectedItem != null;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CloseForm();
+        }
+
+        private void CheckButton()
+        {
+            button1.Enabled = ValidaterUtil.IsValidString(CarModel.Text) && ComboBoxTypeCar.SelectedItem != null && ValidaterUtil.IsValidString(CarNumber.Text)
+                                && CategoryComboBox.SelectedItem != null;
         }
     }
 }

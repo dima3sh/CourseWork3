@@ -41,11 +41,10 @@ namespace AutoPark
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button2 = new System.Windows.Forms.Button();
-            this.BtnEditCategory = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,28 +134,6 @@ namespace AutoPark
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(129, 505);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 31);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Add Category";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // BtnEditCategory
-            // 
-            this.BtnEditCategory.BackColor = System.Drawing.SystemColors.Control;
-            this.BtnEditCategory.Location = new System.Drawing.Point(254, 505);
-            this.BtnEditCategory.Name = "BtnEditCategory";
-            this.BtnEditCategory.Size = new System.Drawing.Size(119, 31);
-            this.BtnEditCategory.TabIndex = 4;
-            this.BtnEditCategory.Text = "Edit Category";
-            this.BtnEditCategory.UseVisualStyleBackColor = false;
-            this.BtnEditCategory.Click += new System.EventHandler(this.BtnEditCategory_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -186,17 +163,27 @@ namespace AutoPark
             this.label2.TabIndex = 7;
             this.label2.Text = "AutoPark";
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.Control;
+            this.button3.Location = new System.Drawing.Point(120, 505);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(119, 31);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Categories";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // ParkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1200, 565);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.BtnEditCategory);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -222,13 +209,12 @@ namespace AutoPark
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button BtnEditCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button button3;
     }
 }
 

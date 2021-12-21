@@ -8,9 +8,12 @@ namespace AutoPark.View
 {
     public partial class EditCategoryForm : Form, ICategoryView
     {
-        public EditCategoryForm()
+        private Category _oldCategory;
+
+        public EditCategoryForm(Category category)
         {
             InitializeComponent();
+            _oldCategory = category;
         }
 
         public ICategoryPresenter Presenter { get; set; }
@@ -32,6 +35,7 @@ namespace AutoPark.View
         private void EditCategoryForm_Load(object sender, EventArgs e)
         {
             comboBox1.Items.AddRange(Presenter.GetCategories().ToArray());
+            comboBox1.SelectedItem = _oldCategory;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,6 +99,12 @@ namespace AutoPark.View
             InvalidCategoriesText.Text = !comboBox1.IsValid ? Properties.Resources.SelectCategory : "";
             InvalidCategory.Text = !ComboBoxType.IsValid ? Properties.Resources.InvalidTypeCar : "";
             InvalidNameText.Text = !TxtBoxName.IsValid ? Properties.Resources.InvalidCategoryName : "";
+        }
+
+        private void ComboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxType.IsValid = ComboBoxType.SelectedItem != null;
+            ShowInvalidText();
         }
     }
 }

@@ -71,16 +71,6 @@ namespace AutoPark
             Presenter.DeleteCar(number);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Presenter.ShowAddCategoryView();
-        }
-
-        private void BtnEditCategory_Click(object sender, EventArgs e)
-        {
-            Presenter.ShowEditCategoryView();
-        }
-
         private void UpdateListViewCars(List<string[]> cars) {
             listView1.Items.Clear();
             listView1.SmallImageList = new ImageList();
@@ -113,5 +103,9 @@ namespace AutoPark
             return emptyImage;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Presenter.ShowCategoriesView();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Model.services;
 using AutoPark.View;
+using AutoPark.View.Forms;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,7 +9,7 @@ using System.Drawing;
 
 namespace AutoPark.Presenters
 {
-    class ParkPresenter : IParkPresenter
+    public class ParkPresenter : IParkPresenter
     {
         private IParkView _view;
         private IService _service;
@@ -61,15 +62,10 @@ namespace AutoPark.Presenters
             carForm.ShowForm();
         }
 
-        public void ShowAddCategoryView()
+        public void ShowCategoriesView()
         {
-            ShowCategoryForm(new AddCategoryForm());
+            ShowCategoryForm(new CategoriesForm());
         }
-        public void ShowEditCategoryView()
-        {
-            ShowCategoryForm(new EditCategoryForm());
-        }
-
         private void ShowCategoryForm(ICategoryView categoryView) {
             ICategoryPresenter carPresenter = new CategoryPresenter(categoryView, _service);
             categoryView.Presenter = carPresenter;
@@ -90,12 +86,13 @@ namespace AutoPark.Presenters
             List<string[]> result = new List<string[]>();
             foreach (Car car in cars)
             {
+                Category category = _service.FindCategoryById(car.CategoryId);
                 string[] s = new string[5];
                 s[0] = "";
                 s[1] = car.Number;
                 s[2] = car.Model;
-                s[3] = _service.FindCategoryById(car.CategoryId) != null ? _service.FindCategoryById(car.CategoryId).Name : "";
-                s[4] = car.Type.ToString();
+                s[3] = category != null ? category.Name : "";
+                s[4] = category != null ? category.Type.ToString() : "";
                 result.Add(s);
             }
             return result;

@@ -2,7 +2,7 @@
 
 namespace AutoPark.View
 {
-    interface IParkView : IView<IParkPresenter>
+    public interface IParkView : IView<IParkPresenter>
     {
         void UpdateParkView();
     }

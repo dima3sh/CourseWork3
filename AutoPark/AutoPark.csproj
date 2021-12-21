@@ -50,7 +50,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>car.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -124,6 +125,12 @@
     <Compile Include="Model\services\IService.cs" />
     <Compile Include="Model\services\ParkService.cs" />
     <Compile Include="Entity\Enums\TypeCar.cs" />
+    <Compile Include="View\Forms\CategoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\CategoriesForm.Designer.cs">
+      <DependentUpon>CategoriesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Forms\ParkForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +165,9 @@
     <EmbeddedResource Include="View\Forms\CarForm.resx">
       <DependentUpon>CarForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\CategoriesForm.resx">
+      <DependentUpon>CategoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Forms\ParkForm.resx">
       <DependentUpon>ParkForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +187,7 @@
     <EmbeddedResource Include="View\Forms\EditCategoryForm.resx">
       <DependentUpon>EditCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\AutoPark.Entity.Car.datasource" />
     <None Include="Properties\DataSources\AutoPark.Model.Category.datasource" />
@@ -193,9 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="car.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
