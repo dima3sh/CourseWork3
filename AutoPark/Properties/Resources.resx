@@ -154,13 +154,13 @@
     <value>Number is invalid! Use only A-Z and 0-9</value>
   </data>
   <data name="InvalidCategoryName" xml:space="preserve">
-    <value>Category name is invalid!</value>
+    <value>Field is invalid! Use only English letters</value>
   </data>
   <data name="InvalidData" xml:space="preserve">
     <value>Data is invalid!</value>
   </data>
   <data name="InvalidModelName" xml:space="preserve">
-    <value>Model name is invalid!</value>
+    <value>Field is invalid! Size shouldn't exceed 25</value>
   </data>
   <data name="InvalidTypeCar" xml:space="preserve">
     <value>Type car isn't selected!</value>

@@ -169,7 +169,7 @@ namespace AutoPark.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Category name is invalid!.
+        ///   Ищет локализованную строку, похожую на Field is invalid! Use only English letters.
         /// </summary>
         internal static string InvalidCategoryName {
             get {
@@ -187,7 +187,7 @@ namespace AutoPark.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Model name is invalid!.
+        ///   Ищет локализованную строку, похожую на Field is invalid! Size shouldn&apos;t exceed 25.
         /// </summary>
         internal static string InvalidModelName {
             get {

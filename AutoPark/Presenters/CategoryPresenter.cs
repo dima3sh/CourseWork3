@@ -2,6 +2,7 @@
 using AutoPark.Entity.Enums;
 using AutoPark.Model.services;
 using AutoPark.View;
+using AutoPark.View.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -100,7 +101,9 @@ namespace AutoPark.Presenters
 
         private void UpdateCategoriesView(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //_view.UpdateCategories();
+            if (_view is CategoriesForm) {
+                ((CategoriesForm)_view).UpdateForm();
+            }
         }
     }
 }

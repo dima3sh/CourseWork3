@@ -113,7 +113,7 @@ namespace AutoPark
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if ((myStream = openFileDialog1.OpenFile()) != null)
                 {
@@ -135,8 +135,8 @@ namespace AutoPark
                 car = new Truck();
             }
             
-            car.Number = CarNumber.Text;
-            car.Model = CarModel.Text;
+            car.Number = CarNumber.Text.Trim();
+            car.Model = CarModel.Text.Trim();
             car.CategoryId = GetCategoryId();           
             return car;
         }
@@ -160,7 +160,7 @@ namespace AutoPark
 
         private void CarModel_TextChanged_1(object sender, EventArgs e)
         {
-            CarModel.IsValid =  ValidaterUtil.IsValidString(CarModel.Text, "^.*$") || CarModel.Text.Trim() == "";
+            CarModel.IsValid =  ValidaterUtil.IsValidString(CarModel.Text, "^.{1,25}$") || CarModel.Text.Trim() == "";
             ShowInvalidText();
             CheckButton();
         }
@@ -202,7 +202,8 @@ namespace AutoPark
 
         private void CheckButton()
         {
-            button1.Enabled = ValidaterUtil.IsValidString(CarModel.Text) && ComboBoxTypeCar.SelectedItem != null && ValidaterUtil.IsValidString(CarNumber.Text)
+            button1.Enabled = ValidaterUtil.IsValidString(CarModel.Text) && ComboBoxTypeCar.SelectedItem != null 
+                                && ValidaterUtil.IsValidString(CarNumber.Text)
                                 && CategoryComboBox.SelectedItem != null;
         }
     }

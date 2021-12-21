@@ -32,7 +32,7 @@ namespace AutoPark.View.Forms
 
         public void ShowForm()
         {
-            Show();
+            ShowDialog();
         }
 
         public void CloseForm()
@@ -45,6 +45,12 @@ namespace AutoPark.View.Forms
             MessageBox.Show(message);
         }
 
+        public void UpdateForm() {
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(Presenter.GetCategories().ToArray());
+            buttonEdit.Enabled = comboBox1.SelectedItem != null;
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             buttonEdit.Enabled = comboBox1.SelectedItem != null;           
@@ -55,14 +61,9 @@ namespace AutoPark.View.Forms
             Presenter.ShowEditCategoryView((Category)comboBox1.SelectedItem);
         }
 
-        private void comboBox1_TextChanged(object sender, EventArgs e)
-        {
-            buttonEdit.Enabled = comboBox1.SelectedItem != null;
-        }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Presenter.ShowAddCategoryView();
-        }
+        }       
     }
 }

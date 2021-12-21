@@ -1,5 +1,6 @@
 ﻿using AutoPark.Entity;
 using AutoPark.Entity.Enums;
+using AutoPark.Model.Utils;
 using AutoPark.Presenters;
 using System;
 using System.Windows.Forms;
@@ -90,7 +91,7 @@ namespace AutoPark.View
         private bool ValidateUpdateForm() {
             comboBox1.IsValid = comboBox1.SelectedItem != null;
             ComboBoxType.IsValid = ComboBoxType.SelectedItem != null;
-            TxtBoxName.IsValid = TxtBoxName.Text.Trim() != "";
+            TxtBoxName.IsValid = TxtBoxName.IsValid && TxtBoxName.Text.Trim() != "";
             ShowInvalidText();
             return comboBox1.IsValid && ComboBoxType.IsValid && TxtBoxName.IsValid;
         }
@@ -104,6 +105,12 @@ namespace AutoPark.View
         private void ComboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBoxType.IsValid = ComboBoxType.SelectedItem != null;
+            ShowInvalidText();
+        }
+
+        private void TxtBoxName_TextChanged(object sender, EventArgs e)
+        {
+            TxtBoxName.IsValid = ValidaterUtil.IsValidString(TxtBoxName.Text, "^[A-Za-z]{1,20}$") || TxtBoxName.Text.Trim() == "";
             ShowInvalidText();
         }
     }

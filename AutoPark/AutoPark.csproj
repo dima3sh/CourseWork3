@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\CarPicture.cs" />
+    <Compile Include="View\IMainCategoryView.cs" />
     <Compile Include="View\Elems\ExtComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

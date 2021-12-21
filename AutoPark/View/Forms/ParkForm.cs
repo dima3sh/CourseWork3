@@ -17,7 +17,7 @@ namespace AutoPark
 
         public void CloseForm()
         {
-            throw new NotImplementedException();
+            Close();
         }
 
         public void showListView(object sender, EventArgs e) {
@@ -38,7 +38,7 @@ namespace AutoPark
 
         public void ShowMessage(string message)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(message);
         }
 
         private void ParkForm_Load_1(object sender, EventArgs e)
@@ -106,6 +106,11 @@ namespace AutoPark
         private void button3_Click(object sender, EventArgs e)
         {
             Presenter.ShowCategoriesView();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CloseForm();
         }
     }
 }

@@ -59,7 +59,6 @@ namespace AutoPark.View.Forms
             this.comboBox1.Size = new System.Drawing.Size(288, 26);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // label2
             // 

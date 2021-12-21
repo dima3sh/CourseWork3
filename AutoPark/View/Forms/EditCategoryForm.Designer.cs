@@ -97,6 +97,7 @@ namespace AutoPark.View
             this.TxtBoxName.Name = "TxtBoxName";
             this.TxtBoxName.Size = new System.Drawing.Size(257, 26);
             this.TxtBoxName.TabIndex = 4;
+            this.TxtBoxName.TextChanged += new System.EventHandler(this.TxtBoxName_TextChanged);
             // 
             // button1
             // 

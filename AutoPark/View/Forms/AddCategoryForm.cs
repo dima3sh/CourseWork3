@@ -56,7 +56,8 @@ namespace AutoPark.View
 
         private void TxtBoxName_TextChanged(object sender, EventArgs e)
         {
-            InvalidCategoryText.Text = "";
+            TxtBoxName.IsValid = ValidaterUtil.IsValidString(TxtBoxName.Text, "^[A-Za-z]{1,20}$") || TxtBoxName.Text.Trim() == "";
+            ShowInvalidText();
             CheckAddButton();
         }
 
